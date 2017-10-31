@@ -30,7 +30,7 @@ Options:
       59,60,61,62,63,64,66,68,69,71,73,78,80].
     --tape-height <height>  Height of programming tape. [default: 68.6]
     --space-above-top-row <space>  Space between edge of tape and first row.  [default: 6]
-    --space-below-bottom-row <space>  Space between last row and edge of tape.  [default: 6]
+    --space-below-bottom-row <space>  Space between last row and edge of tape.  [default: 5]
     --space-before-first-note <space>  Space between end of lead-in and first note.  [default: 20]
     --space-after-last-note <space>  Space between last note and end of tape.  [default: 20]
     --space-between-strips <space>  Vertical space between two strips cut from the same page.
