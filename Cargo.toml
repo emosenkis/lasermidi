@@ -4,7 +4,11 @@ version = "0.1.0"
 authors = ["Eitan Mosenkis <eitan@mosenkis.net>"]
 
 [dependencies]
+css-color-parser = "0.1"
 docopt = "0.8"
+# dxf = "0.3"
+printpdf = { git = "https://github.com/fschutt/printpdf", rev = "6aa279c" }
 rimd = "0.0.1"
 serde = "1.0"
 serde_derive = "1.0"
+serde_json = "1.0"
