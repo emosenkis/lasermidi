@@ -4,7 +4,7 @@ version = "0.1.0"
 dependencies = [
  "css-color-parser 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "docopt 0.8.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "printpdf 0.2.0 (git+https://github.com/fschutt/printpdf?rev=6aa279c)",
+ "printpdf 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "rimd 0.0.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.19 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde_derive 1.0.19 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -317,8 +317,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "lopdf"
-version = "0.13.0"
-source = "git+https://github.com/fschutt/lopdf#c8247a454e40eaab1ddd3af2b1c0d8dd2947b4b5"
+version = "0.14.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "chrono 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "dtoa 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -447,15 +447,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "printpdf"
-version = "0.2.0"
-source = "git+https://github.com/fschutt/printpdf?rev=6aa279c#6aa279c2943a7ee5494d3dc5f613289c2f041033"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "chrono 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "error-chain 0.11.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "freetype-rs 0.16.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "image 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "log 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)",
- "lopdf 0.13.0 (git+https://github.com/fschutt/lopdf)",
+ "lopdf 0.14.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "num 0.1.40 (registry+https://github.com/rust-lang/crates.io-index)",
  "rand 0.3.18 (registry+https://github.com/rust-lang/crates.io-index)",
  "svg 0.5.7 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -710,7 +710,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum libz-sys 1.0.18 (registry+https://github.com/rust-lang/crates.io-index)" = "87f737ad6cc6fd6eefe3d9dc5412f1573865bded441300904d2f42269e140f16"
 "checksum linked-hash-map 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "6d262045c5b87c0861b3f004610afd0e2c851e2908d08b6c870cbb9d5f494ecd"
 "checksum log 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)" = "880f77541efa6e5cc74e76910c9884d9859683118839d6a1dc3b11e63512565b"
-"checksum lopdf 0.13.0 (git+https://github.com/fschutt/lopdf)" = "<none>"
+"checksum lopdf 0.14.1 (registry+https://github.com/rust-lang/crates.io-index)" = "cde52083808cdb5210b4d87c58e0ab2be7fba92eeffe78871da85c79dd26833c"
 "checksum lzw 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7d947cbb889ed21c2a84be6ffbaebf5b4e0f4340638cba0444907e38b56be084"
 "checksum memchr 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)" = "148fab2e51b4f1cfc66da2a7c32981d1d3c083a803978268bb11fe4b86925e7a"
 "checksum miniz-sys 0.1.10 (registry+https://github.com/rust-lang/crates.io-index)" = "609ce024854aeb19a0ef7567d348aaa5a746b32fb72e336df7fcc16869d7e2b4"
@@ -725,7 +725,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum pkg-config 0.3.9 (registry+https://github.com/rust-lang/crates.io-index)" = "3a8b4c6b8165cd1a1cd4b9b120978131389f64bdaf456435caa41e630edba903"
 "checksum png 0.11.0 (registry+https://github.com/rust-lang/crates.io-index)" = "f0b0cabbbd20c2d7f06dbf015e06aad59b6ca3d9ed14848783e98af9aaf19925"
 "checksum pom 1.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "60f6ce597ecdcc9a098e7fddacb1065093a3d66446fa16c675e7e71d1b5c28e6"
-"checksum printpdf 0.2.0 (git+https://github.com/fschutt/printpdf?rev=6aa279c)" = "<none>"
+"checksum printpdf 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "4fb26d5bbca12792634eb294839717b58907b92fb1597adde6251af1fe340d45"
 "checksum quote 0.3.15 (registry+https://github.com/rust-lang/crates.io-index)" = "7a6e920b65c65f10b2ae65c831a81a073a89edd28c7cce89475bff467ab4167a"
 "checksum rand 0.3.18 (registry+https://github.com/rust-lang/crates.io-index)" = "6475140dfd8655aeb72e1fd4b7a1cc1c202be65d71669476e392fe62532b9edd"
 "checksum rayon 0.8.2 (registry+https://github.com/rust-lang/crates.io-index)" = "b614fe08b6665cb9a231d07ac1364b0ef3cb3698f1239ee0c4c3a88a524f54c8"

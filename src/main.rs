@@ -1,5 +1,5 @@
 // TODO:
-// - Use error_chain and remove the last few calls to unwrap() and expect()
+// - Use Failure and remove the last few calls to unwrap() and expect()
 // - Draw grid
 // - Separate into lib and binary
 // - Warn or fail if output pattern doesn't contain % and num_pages > 1
@@ -37,6 +37,8 @@ Usage:
 All measurements are in mm.
 
 Options:
+    -h, --help  Show this message and exit.
+    --version  Print the version and exit.
     -t, --track-num <num>  Track number to process. [default: 1]
     -n, --notes <notes>  Comma-separated list of MIDI note numbers supported by your music box.
       [default: 40,42,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,\
@@ -120,7 +122,13 @@ struct Args {
 
 fn main() {
     let args: Args = Docopt::new(USAGE)
-        .and_then(|d| d.deserialize())
+        .and_then(|d| {
+            d.help(true)
+                .version(Some(
+                    env!("CARGO_PKG_NAME").to_string() + " v" + env!("CARGO_PKG_VERSION"),
+                ))
+                .deserialize()
+        })
         .unwrap_or_else(|e| e.exit());
 
     let notes: Vec<u8> = args.flag_notes
@@ -167,16 +175,18 @@ fn main() {
         output_pattern
             .as_ref()
             .map(|o| o.to_lowercase())
-            .map(|o| if o.ends_with(".json") {
-                OutputFormat::JSON
-            } else if o.ends_with(".pdf") {
-                OutputFormat::PDF
-            } else if o.ends_with(".svg") {
-                OutputFormat::SVG
-            // } else if o.ends_with(".dxf") {
-            // OutputFormat::DXF
-            } else {
-                OutputFormat::JSON
+            .map(|o| {
+                if o.ends_with(".json") {
+                    OutputFormat::JSON
+                } else if o.ends_with(".pdf") {
+                    OutputFormat::PDF
+                } else if o.ends_with(".svg") {
+                    OutputFormat::SVG
+                // } else if o.ends_with(".dxf") {
+                // OutputFormat::DXF
+                } else {
+                    OutputFormat::JSON
+                }
             })
             .unwrap_or(OutputFormat::JSON)
     });
@@ -535,12 +545,21 @@ impl Options {
             self.page_height,
             "Layer 1".to_string(),
         );
-        let font = if self.title.is_empty() && self.font_file.is_some() {
+        let font = if pages
+            .iter()
+            .flat_map(|p| p.strips.iter())
+            .all(|s| s.texts.is_empty())
+        {
             None
+        } else if self.font_file.is_some() {
+            Some(
+                doc.add_external_font(File::open(self.font_file.as_ref().unwrap())?)
+                    .expect("Failed to load font"),
+            )
         } else {
             Some(
-                doc.add_font(File::open(self.font_file.as_ref().unwrap())?)
-                    .expect("Failed to load font"),
+                doc.add_builtin_font(BuiltinFont::TimesRoman)
+                    .expect("Failed to load built-in font"),
             )
         };
         for (page_num, page) in pages.iter().enumerate() {
@@ -556,8 +575,7 @@ impl Options {
                 self.cut_color.b as f64 / 255.0,
                 None,
             )));
-            // This is innacurate since it only handles positive integers
-            cur_layer.set_outline_thickness(self.cut_stroke_width as i64);
+            cur_layer.set_outline_thickness(self.cut_stroke_width);
             for strip in &page.strips {
                 cur_layer.add_shape(Line::new(
                     // The outline should be grown by 1/2 line thickness to achieve the desired
@@ -571,16 +589,14 @@ impl Options {
                     /* is_closed */ true,
                     /* has_fill */ false,
                 ));
-                if font.is_some() && !self.title.is_empty() {
-                    for text in &strip.texts {
-                        cur_layer.use_text(
-                            text.text.clone(),
-                            mm_to_pt!(text.font_size) as i64,
-                            text.position.0,
-                            self.page_height - text.position.1,
-                            font.as_ref().unwrap(),
-                        );
-                    }
+                for text in &strip.texts {
+                    cur_layer.use_text(
+                        text.text.clone(),
+                        mm_to_pt!(text.font_size) as i64,
+                        text.position.0,
+                        self.page_height - text.position.1,
+                        font.as_ref().unwrap(),
+                    );
                 }
                 for hole in &strip.holes {
                     let x = hole.0;
