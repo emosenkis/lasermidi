@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Lasermidi</title>
+    </head>
+    <body>
+        MIDI file: <input type="file" id="file" name="file"/><br/>
+        <code><pre id="usage">Loading...</pre></code><br/>
+        Flags: <textarea id="flags"></textarea><br/>
+        <button onclick="convert()">Convert to SVG</button><br/>
+        <output id="output"></output><br/>
+        <img id="preview"/>
+        <script src="js/app.js"></script>
+        <script>
+            var midiBuffer;
+            function handleFileSelect(e) {
+                var file = e.target.files[0];
+                if (!file) {
+                    return;
+                }
+                if (file.type != 'audio/midi') {
+                    alert('Only MIDI files are supported.');
+                    e.target.value = '';
+                    return;
+                }
+                if (file.size > 1024 * 1024) {
+                    alert('Files larger than 1 MiB are not supported.');
+                    e.target.value = '';
+                    return;
+                }
+                var reader = new FileReader();
+                reader.onload = handleFileLoad;
+                reader.onerror = function(e) {alert("Failed to load file: " + e)};
+                reader.readAsArrayBuffer(file);
+            }
+            function handleFileLoad(e) {
+                midiBuffer = new Uint8Array(e.target.result);
+            }
+            document.getElementById('file').addEventListener('change', handleFileSelect, false);
+            function convert() {
+                if (!midiBuffer) {
+                    alert("Please choose a MIDI file.");
+                    return;
+                }
+                Module.convert(midiBuffer, "lasermidi " + document.getElementById('flags').value, document.getElementById('file').files[0].name);
+            }
+            function preview(dataUrl) {
+                document.getElementById("preview").src = dataUrl;
+            }
+        </script>
+    </body>
+</html>

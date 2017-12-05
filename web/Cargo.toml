@@ -1,19 +1,15 @@
 [package]
-name = "lasermidi"
+name = "lasermidi_web"
 version = "0.1.0"
 authors = ["Eitan Mosenkis <eitan@mosenkis.net>"]
-
-[features]
-default = ["pdf"]
-pdf = ["printpdf"]
-# dxf = ["dxf"]
 
 [dependencies]
 css-color-parser = "0.1"
 docopt = "0.8"
-# dxf = "0.3"
-printpdf = { version = "0.2.1", optional = true }
+lasermidi = { path = "..", default-features = false }
 rimd = "0.0.1"
 serde = "1.0"
 serde_derive = "1.0"
 serde_json = "1.0"
+shlex = "0.1.1"
+stdweb = "0.1.3"
